@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="tictac"/>
+        <attribute name="authors" value="skyme"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2026-10-12 08:54:37 am"/>
+        <attribute name="created" value="c2t5bWU7TEFQVE9QLTVBMjBVUUEyOzIwMjYtMTAtMTE7MDE6MDE6MjMgcG07Mjg4Nw=="/>
+        <attribute name="edited" value="c2t5bWU7TEFQVE9QLTVBMjBVUUEyOzIwMjYtMTAtMTI7MDg6NTQ6MzcgYW07MjszMDAy"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="box1" type="String" array="False" size=""/>
+            <declare name="box2" type="String" array="False" size=""/>
+            <declare name="box3" type="String" array="False" size=""/>
+            <declare name="currentPlayer" type="String" array="False" size=""/>
+            <declare name="chosenBox" type="Integer" array="False" size=""/>
+            <declare name="moveCount" type="Integer" array="False" size=""/>
+            <declare name="gameOver" type="Boolean" array="False" size=""/>
+            <declare name="randomNumber" type="Integer" array="False" size=""/>
+            <assign variable="box1" expression="&quot;&quot;"/>
+            <assign variable="box2" expression="&quot;&quot;"/>
+            <assign variable="box3" expression="&quot;&quot;"/>
+            <assign variable="gameOver" expression="False"/>
+            <assign variable="moveCount" expression="0"/>
+            <assign variable="randomNumber" expression="Random(2) + 1"/>
+            <if expression="randomNumber = 1">
+                <then>
+                    <assign variable="currentPlayer" expression="&quot;O&quot;"/>
+                    <output expression="&quot;User (O) starts first&quot;" newline="True"/>
+                </then>
+                <else>
+                    <assign variable="currentPlayer" expression="&quot;X&quot;"/>
+                    <output expression="&quot;Computer (X) starts first&quot;" newline="True"/>
+                </else>
+            </if>
+            <while expression="gameOver = False">
+                <if expression="currentPlayer = &quot;O&quot;">
+                    <then>
+                        <output expression="&quot;User (O), choose a box (1-3): &quot;" newline="True"/>
+                        <input variable="chosenBox"/>
+                        <if expression="chosenBox = 1 and box1 = &quot;&quot;">
+                            <then>
+                                <assign variable="box1" expression="&quot;O&quot;"/>
+                                <assign variable="moveCount" expression="moveCount + 1"/>
+                                <assign variable="currentPlayer" expression="&quot;X&quot;"/>
+                            </then>
+                            <else>
+                                <if expression="chosenBox = 2 and box2 = &quot;&quot;">
+                                    <then>
+                                        <assign variable="box2" expression="&quot;O&quot;"/>
+                                        <assign variable="moveCount" expression="moveCount + 1"/>
+                                        <assign variable="currentPlayer" expression="&quot;X&quot;"/>
+                                    </then>
+                                    <else>
+                                        <if expression="chosenBox = 3 and box3 = &quot;&quot;">
+                                            <then>
+                                                <assign variable="box3" expression="&quot;O&quot;"/>
+                                                <assign variable="moveCount" expression="moveCount + 1"/>
+                                                <assign variable="currentPlayer" expression="&quot;X&quot;"/>
+                                            </then>
+                                            <else>
+                                                <output expression="&quot;Invalid move! Try again.&quot;" newline="True"/>
+                                            </else>
+                                        </if>
+                                    </else>
+                                </if>
+                            </else>
+                        </if>
+                    </then>
+                    <else>
+                        <assign variable="chosenBox" expression="Random(3) + 1"/>
+                        <if expression="chosenBox = 1 and box1 = &quot;&quot;">
+                            <then>
+                                <assign variable="box1" expression="&quot;X&quot;"/>
+                                <assign variable="moveCount" expression="moveCount + 1"/>
+                                <assign variable="currentPlayer" expression="&quot;O&quot;"/>
+                                <output expression="&quot;Computer (X) chose box 1&quot;" newline="True"/>
+                            </then>
+                            <else>
+                                <if expression="chosenBox = 2 and box2 = &quot;&quot;">
+                                    <then>
+                                        <assign variable="box2" expression="&quot;X&quot;"/>
+                                        <assign variable="moveCount" expression="moveCount + 1"/>
+                                        <output expression="&quot;Computer (X) chose box 2&quot;" newline="True"/>
+                                        <assign variable="currentPlayer" expression="&quot;O&quot;"/>
+                                    </then>
+                                    <else>
+                                        <if expression="chosenBox = 3 and box3 = &quot;&quot;">
+                                            <then>
+                                                <assign variable="box3" expression="&quot;X&quot;"/>
+                                                <assign variable="moveCount" expression="moveCount + 1"/>
+                                                <output expression="&quot;Computer (X) chose box 3&quot;" newline="True"/>
+                                                <assign variable="currentPlayer" expression="&quot;O&quot;"/>
+                                            </then>
+                                            <else/>
+                                        </if>
+                                    </else>
+                                </if>
+                            </else>
+                        </if>
+                    </else>
+                </if>
+                <output expression="&quot;[&quot; &amp; box1 &amp; &quot;] [&quot; &amp; box2 &amp; &quot;] [&quot; &amp; box3 &amp; &quot;]&quot;" newline="True"/>
+                <if expression="box1 &lt;&gt; &quot;&quot; and box1 = box2 and box2 = box3">
+                    <then>
+                        <output expression="&quot;Player &quot; &amp; box1 &amp; &quot; wins!&quot;" newline="True"/>
+                        <assign variable="gameOver" expression="True"/>
+                    </then>
+                    <else>
+                        <if expression="moveCount = 3">
+                            <then>
+                                <output expression="&quot;It's a draw!&quot;" newline="True"/>
+                                <assign variable="gameOver" expression="True"/>
+                            </then>
+                            <else/>
+                        </if>
+                    </else>
+                </if>
+            </while>
+            <output expression="&quot;Game over. Thanks for playing!&quot;" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
